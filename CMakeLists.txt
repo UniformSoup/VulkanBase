@@ -3,7 +3,8 @@ project(VulkanBase VERSION 1.0.0)
 
 find_package(Vulkan REQUIRED)
 
-add_subdirectory(src)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-target_link_libraries(VulkanBase PUBLIC ${Vulkan_LIBRARIES})
-target_include_directories(VulkanBase PUBLIC ${Vulkan_INCLUDE_DIRS} "./include/VulkanBase")
+cmake_policy(SET CMP0069 NEW)
+add_subdirectory(src)
