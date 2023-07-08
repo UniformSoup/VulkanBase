@@ -2,6 +2,8 @@
 
 #include <vulkan/vulkan.hpp>
 
+#include <string>
+
 namespace VulkanBase
 {
     class Window
@@ -15,5 +17,6 @@ namespace VulkanBase
         virtual void                     createWindowSurface(VkInstance& instance, VkSurfaceKHR* const pSurface) = 0;
         virtual std::vector<char const*> requiredInstanceExtensions() const                                      = 0;
         virtual VkExtent2D               getExtent() const                                                       = 0;
+        virtual const char*              name() const                                                            = 0;
     };
 } // namespace VulkanBase

@@ -84,7 +84,7 @@ namespace VulkanBase
 
         VkApplicationInfo appInfo  = {};
         appInfo.sType              = VK_STRUCTURE_TYPE_APPLICATION_INFO;
-        appInfo.pApplicationName   = "Simple Chess";
+        appInfo.pApplicationName   = window.name();
         appInfo.applicationVersion = VK_MAKE_VERSION(1, 0, 0);
         appInfo.pEngineName        = "VulkanBase";
         appInfo.engineVersion      = VK_MAKE_VERSION(1, 0, 0);
