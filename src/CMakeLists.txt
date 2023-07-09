@@ -6,5 +6,5 @@ add_library(
     Model.cpp
 )
 
-target_link_libraries(VulkanBase PUBLIC ${Vulkan_LIBRARIES})
-target_include_directories(VulkanBase PUBLIC ${Vulkan_INCLUDE_DIRS} "../include/VulkanBase" glm)
+target_link_libraries(VulkanBase PUBLIC ${Vulkan_LIBRARIES} glm::glm)
+target_include_directories(VulkanBase PUBLIC ${Vulkan_INCLUDE_DIRS} "../include/VulkanBase")
