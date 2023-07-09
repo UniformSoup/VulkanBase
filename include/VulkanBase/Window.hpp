@@ -1,22 +1,21 @@
 #pragma once
 
-#include <vulkan/vulkan.hpp>
-
 #include <string>
+#include <vulkan/vulkan.hpp>
 
 namespace VulkanBase
 {
-    class Window
-    {
-      public:
+	class Window
+	{
+		public:
 
-        Window()                         = default;
-        Window(Window const&)            = delete;
-        Window& operator=(Window const&) = delete;
+			Window()						 = default;
+			Window(Window const&)			 = delete;
+			Window& operator=(Window const&) = delete;
 
-        virtual void                     createWindowSurface(VkInstance& instance, VkSurfaceKHR* const pSurface) = 0;
-        virtual std::vector<char const*> requiredInstanceExtensions() const                                      = 0;
-        virtual VkExtent2D               getExtent() const                                                       = 0;
-        virtual const char*              name() const                                                            = 0;
-    };
-} // namespace VulkanBase
+			virtual void					 createWindowSurface(VkInstance& instance, VkSurfaceKHR* const pSurface) = 0;
+			virtual std::vector<char const*> requiredInstanceExtensions() const										 = 0;
+			virtual VkExtent2D				 getExtent() const														 = 0;
+			virtual char const*				 name() const															 = 0;
+	};
+}	 // namespace VulkanBase
