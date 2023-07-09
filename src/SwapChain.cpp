@@ -13,7 +13,8 @@ namespace VulkanBase
 {
 
 	SwapChain::SwapChain(Device& deviceRef, VkExtent2D extent, std::unique_ptr<SwapChain> const&& old)
-		: device { deviceRef }, windowExtent { extent }
+		: device {deviceRef},
+		  windowExtent {extent}
 	{
 		(old.get() == nullptr) ? createSwapChain(VK_NULL_HANDLE) : createSwapChain(old->swapChain);
 		createImageViews();
@@ -78,8 +79,8 @@ namespace VulkanBase
 		VkSubmitInfo submitInfo = {};
 		submitInfo.sType		= VK_STRUCTURE_TYPE_SUBMIT_INFO;
 
-		VkSemaphore			 waitSemaphores[] = { imageAvailableSemaphores[currentFrame] };
-		VkPipelineStageFlags waitStages[]	  = { VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT };
+		VkSemaphore			 waitSemaphores[] = {imageAvailableSemaphores[currentFrame]};
+		VkPipelineStageFlags waitStages[]	  = {VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT};
 		submitInfo.waitSemaphoreCount		  = 1;
 		submitInfo.pWaitSemaphores			  = waitSemaphores;
 		submitInfo.pWaitDstStageMask		  = waitStages;
@@ -87,7 +88,7 @@ namespace VulkanBase
 		submitInfo.commandBufferCount = 1;
 		submitInfo.pCommandBuffers	  = buffers;
 
-		VkSemaphore signalSemaphores[]	= { renderFinishedSemaphores[currentFrame] };
+		VkSemaphore signalSemaphores[]	= {renderFinishedSemaphores[currentFrame]};
 		submitInfo.signalSemaphoreCount = 1;
 		submitInfo.pSignalSemaphores	= signalSemaphores;
 
@@ -103,7 +104,7 @@ namespace VulkanBase
 		presentInfo.waitSemaphoreCount = 1;
 		presentInfo.pWaitSemaphores	   = signalSemaphores;
 
-		VkSwapchainKHR swapChains[] = { swapChain };
+		VkSwapchainKHR swapChains[] = {swapChain};
 		presentInfo.swapchainCount	= 1;
 		presentInfo.pSwapchains		= swapChains;
 
@@ -142,7 +143,7 @@ namespace VulkanBase
 		createInfo.imageUsage		= VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT;
 
 		QueueFamilyIndices indices				= device.findPhysicalQueueFamilies();
-		uint32_t		   queueFamilyIndices[] = { indices.graphicsFamily, indices.presentFamily };
+		uint32_t		   queueFamilyIndices[] = {indices.graphicsFamily, indices.presentFamily};
 
 		if (indices.graphicsFamily != indices.presentFamily)
 		{
@@ -251,7 +252,7 @@ namespace VulkanBase
 			VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT | VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT;
 		dependency.dstAccessMask = VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT | VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT;
 
-		std::array<VkAttachmentDescription, 2> attachments	  = { colorAttachment, depthAttachment };
+		std::array<VkAttachmentDescription, 2> attachments	  = {colorAttachment, depthAttachment};
 		VkRenderPassCreateInfo				   renderPassInfo = {};
 		renderPassInfo.sType								  = VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO;
 		renderPassInfo.attachmentCount						  = static_cast<uint32_t>(attachments.size());
@@ -272,7 +273,7 @@ namespace VulkanBase
 		swapChainFramebuffers.resize(imageCount());
 		for (size_t i = 0; i < imageCount(); i++)
 		{
-			std::array<VkImageView, 2> attachments = { swapChainImageViews[i], depthImageViews[i] };
+			std::array<VkImageView, 2> attachments = {swapChainImageViews[i], depthImageViews[i]};
 
 			VkExtent2D				swapChainExtent = getSwapChainExtent();
 			VkFramebufferCreateInfo framebufferInfo = {};
@@ -418,7 +419,7 @@ namespace VulkanBase
 	VkFormat SwapChain::findDepthFormat()
 	{
 		return device.findSupportedFormat(
-			{ VK_FORMAT_D32_SFLOAT, VK_FORMAT_D32_SFLOAT_S8_UINT, VK_FORMAT_D24_UNORM_S8_UINT }, VK_IMAGE_TILING_OPTIMAL,
+			{VK_FORMAT_D32_SFLOAT, VK_FORMAT_D32_SFLOAT_S8_UINT, VK_FORMAT_D24_UNORM_S8_UINT}, VK_IMAGE_TILING_OPTIMAL,
 			VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT);
 	}
 

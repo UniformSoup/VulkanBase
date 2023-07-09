@@ -164,7 +164,7 @@ namespace VulkanBase
 		config.depthStencilInfo.front				  = {};	   // Optional
 		config.depthStencilInfo.back				  = {};	   // Optional
 
-		config.dynamicStateEnables				  = { VK_DYNAMIC_STATE_VIEWPORT, VK_DYNAMIC_STATE_SCISSOR };
+		config.dynamicStateEnables				  = {VK_DYNAMIC_STATE_VIEWPORT, VK_DYNAMIC_STATE_SCISSOR};
 		config.dynamicStateInfo.sType			  = VK_STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO;
 		config.dynamicStateInfo.pDynamicStates	  = config.dynamicStateEnables.data();
 		config.dynamicStateInfo.dynamicStateCount = static_cast<uint32_t>(config.dynamicStateEnables.size());

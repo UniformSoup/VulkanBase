@@ -49,7 +49,8 @@ namespace VulkanBase
 	}
 
 	// class member functions
-	Device::Device(Window& window) : window { window }
+	Device::Device(Window& window)
+		: window {window}
 	{
 		createInstance();
 #ifdef DEBUG
@@ -149,7 +150,7 @@ namespace VulkanBase
 		QueueFamilyIndices indices = findQueueFamilies(physicalDevice);
 
 		std::vector<VkDeviceQueueCreateInfo> queueCreateInfos;
-		std::set<uint32_t>					 uniqueQueueFamilies = { indices.graphicsFamily, indices.presentFamily };
+		std::set<uint32_t>					 uniqueQueueFamilies = {indices.graphicsFamily, indices.presentFamily};
 
 		float queuePriority = 1.0f;
 		for (uint32_t queueFamily : uniqueQueueFamilies)
@@ -466,8 +467,8 @@ namespace VulkanBase
 		region.imageSubresource.baseArrayLayer = 0;
 		region.imageSubresource.layerCount	   = layerCount;
 
-		region.imageOffset = { 0, 0, 0 };
-		region.imageExtent = { width, height, 1 };
+		region.imageOffset = {0, 0, 0};
+		region.imageExtent = {width, height, 1};
 
 		vkCmdCopyBufferToImage(commandBuffer, buffer, image, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, 1, &region);
 		endSingleTimeCommands(commandBuffer);
