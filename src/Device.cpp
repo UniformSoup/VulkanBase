@@ -229,7 +229,7 @@ namespace VulkanBase
 		std::vector<VkLayerProperties> availableLayers(layerCount);
 		vkEnumerateInstanceLayerProperties(&layerCount, availableLayers.data());
 
-		std::vector<std::string const> availableLayerNames;
+		std::vector<std::string> availableLayerNames;
 		availableLayerNames.reserve(layerCount);
 
 		for (auto& layer : availableLayers) availableLayerNames.emplace_back(layer.layerName);

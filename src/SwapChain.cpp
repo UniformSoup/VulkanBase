@@ -34,7 +34,7 @@ namespace VulkanBase
 			swapChain = VK_NULL_HANDLE;
 		}
 
-		for (int i = 0; i < depthImages.size(); i++)
+		for (uint64_t i = 0; i < depthImages.size(); i++)
 		{
 			vkDestroyImageView(device.device(), depthImageViews[i], nullptr);
 			vkDestroyImage(device.device(), depthImages[i], nullptr);
@@ -300,7 +300,7 @@ namespace VulkanBase
 		depthImageMemorys.resize(imageCount());
 		depthImageViews.resize(imageCount());
 
-		for (int i = 0; i < depthImages.size(); i++)
+		for (uint64_t i = 0; i < depthImages.size(); i++)
 		{
 			VkImageCreateInfo imageInfo {};
 			imageInfo.sType			= VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
