@@ -7,4 +7,4 @@ add_library(
 )
 
 target_link_libraries(VulkanBase PUBLIC ${Vulkan_LIBRARIES})
-target_include_directories(VulkanBase PUBLIC ${Vulkan_INCLUDE_DIRS} "../include/VulkanBase")
+target_include_directories(VulkanBase PUBLIC ${Vulkan_INCLUDE_DIRS} "../include/VulkanBase" glm)
