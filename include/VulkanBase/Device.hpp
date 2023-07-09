@@ -103,4 +103,4 @@ namespace VulkanBase
 #endif
 			};
 	};
-}	 // namespace VulkanBase
+}

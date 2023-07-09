@@ -59,4 +59,4 @@ namespace VulkanBase
 
 		return attribDescriptions;
 	}
-}	 // namespace VulkanBase
+}

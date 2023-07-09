@@ -86,4 +86,4 @@ namespace VulkanBase
 			size_t					 currentFrame = 0;
 	};
 
-}	 // namespace VulkanBase
+}

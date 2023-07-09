@@ -501,4 +501,4 @@ namespace VulkanBase
 		}
 	}
 
-}	 // namespace VulkanBase
+}

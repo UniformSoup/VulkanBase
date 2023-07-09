@@ -170,4 +170,4 @@ namespace VulkanBase
 		config.dynamicStateInfo.dynamicStateCount = static_cast<uint32_t>(config.dynamicStateEnables.size());
 		config.dynamicStateInfo.flags			  = 0;
 	}
-}	 // namespace VulkanBase
+}

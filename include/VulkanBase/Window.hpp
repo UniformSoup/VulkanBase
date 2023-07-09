@@ -18,4 +18,4 @@ namespace VulkanBase
 			virtual VkExtent2D				 getExtent() const														 = 0;
 			virtual char const*				 name() const															 = 0;
 	};
-}	 // namespace VulkanBase
+}

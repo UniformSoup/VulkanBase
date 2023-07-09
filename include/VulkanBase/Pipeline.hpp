@@ -44,4 +44,4 @@ namespace VulkanBase
 			Pipeline(Pipeline const&)			 = delete;
 			Pipeline& operator=(Pipeline const&) = delete;
 	};
-}	 // namespace VulkanBase
+}

@@ -38,4 +38,4 @@ namespace VulkanBase
 			void bind(VkCommandBuffer commandBuffer) const;
 			void draw(VkCommandBuffer commandBuffer) const;
 	};
-}	 // namespace VulkanBase
+}
