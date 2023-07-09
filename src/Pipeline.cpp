@@ -10,7 +10,7 @@
 std::vector<uint8_t> read(std::string const& filepath)
 {
 	std::ifstream file(filepath, std::ios::binary);
-	if(!file.is_open()) throw std::runtime_error("Failed to open: " + filepath);
+	if (!file.is_open()) throw std::runtime_error("Failed to open: " + filepath);
 
 	return std::vector<uint8_t>((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
 }
@@ -22,7 +22,7 @@ void createShaderModule(VkDevice device, std::vector<uint8_t> const& code, VkSha
 	createInfo.codeSize					= code.size();
 	createInfo.pCode					= reinterpret_cast<uint32_t const*>(code.data());
 
-	if(vkCreateShaderModule(device, &createInfo, nullptr, pShaderModule) != VK_SUCCESS)
+	if (vkCreateShaderModule(device, &createInfo, nullptr, pShaderModule) != VK_SUCCESS)
 		throw std::runtime_error("Failed to create shader module!");
 }
 
@@ -85,7 +85,7 @@ namespace VulkanBase
 		pipelineInfo.basePipelineIndex	= -1;
 		pipelineInfo.basePipelineHandle = VK_NULL_HANDLE;
 
-		if(vkCreateGraphicsPipelines(device.device(), VK_NULL_HANDLE, 1, &pipelineInfo, nullptr, &graphicsPipeline) != VK_SUCCESS)
+		if (vkCreateGraphicsPipelines(device.device(), VK_NULL_HANDLE, 1, &pipelineInfo, nullptr, &graphicsPipeline) != VK_SUCCESS)
 			throw std::runtime_error("Failed to create graphics pipeline!");
 	}
 

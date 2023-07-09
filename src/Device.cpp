@@ -37,7 +37,7 @@ void createDebugMessenger(VkInstance& instance, VkDebugUtilsMessengerEXT& debugM
 	auto vkCreateDebugUtilsMessengerEXT =
 		(PFN_vkCreateDebugUtilsMessengerEXT) vkGetInstanceProcAddr(instance, "vkCreateDebugUtilsMessengerEXT");
 
-	if(vkCreateDebugUtilsMessengerEXT(instance, &createInfo, nullptr, &debugMessenger) != VK_SUCCESS)
+	if (vkCreateDebugUtilsMessengerEXT(instance, &createInfo, nullptr, &debugMessenger) != VK_SUCCESS)
 		throw std::runtime_error("failed to set up debug messenger!");
 }
 
@@ -79,7 +79,7 @@ namespace VulkanBase
 	void Device::createInstance()
 	{
 #ifdef DEBUG
-		if(!areValidationLayersSupported())
+		if (!areValidationLayersSupported())
 			throw std::runtime_error("validation layers requested, but not available!");
 #endif
 
@@ -115,9 +115,9 @@ namespace VulkanBase
 		createInfo.pNext			 = nullptr;
 #endif
 
-		if(!hasRequiredInstanceExtensions()) throw std::runtime_error("Missing required extension!");
+		if (!hasRequiredInstanceExtensions()) throw std::runtime_error("Missing required extension!");
 
-		if(vkCreateInstance(&createInfo, nullptr, &instance) != VK_SUCCESS)
+		if (vkCreateInstance(&createInfo, nullptr, &instance) != VK_SUCCESS)
 			throw std::runtime_error("Failed to create instance!");
 	}
 
@@ -125,21 +125,21 @@ namespace VulkanBase
 	{
 		uint32_t deviceCount = 0;
 		vkEnumeratePhysicalDevices(instance, &deviceCount, nullptr);
-		if(deviceCount == 0) { throw std::runtime_error("failed to find GPUs with Vulkan support!"); }
+		if (deviceCount == 0) { throw std::runtime_error("failed to find GPUs with Vulkan support!"); }
 
 		std::vector<VkPhysicalDevice> devices(deviceCount);
 		vkEnumeratePhysicalDevices(instance, &deviceCount, devices.data());
 
-		for(auto const& device : devices)
+		for (auto const& device : devices)
 		{
-			if(isDeviceSuitable(device))
+			if (isDeviceSuitable(device))
 			{
 				physicalDevice = device;
 				break;
 			}
 		}
 
-		if(physicalDevice == VK_NULL_HANDLE) { throw std::runtime_error("failed to find a suitable GPU!"); }
+		if (physicalDevice == VK_NULL_HANDLE) { throw std::runtime_error("failed to find a suitable GPU!"); }
 
 		vkGetPhysicalDeviceProperties(physicalDevice, &properties);
 	}
@@ -152,7 +152,7 @@ namespace VulkanBase
 		std::set<uint32_t>					 uniqueQueueFamilies = { indices.graphicsFamily, indices.presentFamily };
 
 		float queuePriority = 1.0f;
-		for(uint32_t queueFamily : uniqueQueueFamilies)
+		for (uint32_t queueFamily : uniqueQueueFamilies)
 		{
 			VkDeviceQueueCreateInfo queueCreateInfo = {};
 			queueCreateInfo.sType					= VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
@@ -177,7 +177,7 @@ namespace VulkanBase
 
 		createInfo.enabledLayerCount = 0;
 
-		if(vkCreateDevice(physicalDevice, &createInfo, nullptr, &device_) != VK_SUCCESS)
+		if (vkCreateDevice(physicalDevice, &createInfo, nullptr, &device_) != VK_SUCCESS)
 		{
 			throw std::runtime_error("failed to create logical device!");
 		}
@@ -195,7 +195,7 @@ namespace VulkanBase
 		poolInfo.queueFamilyIndex		 = queueFamilyIndices.graphicsFamily;
 		poolInfo.flags					 = VK_COMMAND_POOL_CREATE_TRANSIENT_BIT | VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT;
 
-		if(vkCreateCommandPool(device_, &poolInfo, nullptr, &commandPool) != VK_SUCCESS)
+		if (vkCreateCommandPool(device_, &poolInfo, nullptr, &commandPool) != VK_SUCCESS)
 		{
 			throw std::runtime_error("failed to create command pool!");
 		}
@@ -208,7 +208,7 @@ namespace VulkanBase
 		bool extensionsSupported = checkDeviceExtensionSupport(device);
 
 		bool swapChainAdequate = false;
-		if(extensionsSupported)
+		if (extensionsSupported)
 		{
 			SwapChainSupportDetails swapChainSupport = querySwapChainSupport(device);
 			swapChainAdequate						 = !swapChainSupport.formats.empty() && !swapChainSupport.presentModes.empty();
@@ -231,10 +231,10 @@ namespace VulkanBase
 		std::vector<std::string const> availableLayerNames;
 		availableLayerNames.reserve(layerCount);
 
-		for(auto& layer : availableLayers) availableLayerNames.emplace_back(layer.layerName);
+		for (auto& layer : availableLayers) availableLayerNames.emplace_back(layer.layerName);
 
-		for(char const* layerName : validationLayers)
-			if(std::find(availableLayerNames.begin(), availableLayerNames.end(), std::string(layerName)) == availableLayerNames.end())
+		for (char const* layerName : validationLayers)
+			if (std::find(availableLayerNames.begin(), availableLayerNames.end(), std::string(layerName)) == availableLayerNames.end())
 				return false;
 
 		return true;
@@ -258,11 +258,11 @@ namespace VulkanBase
 		vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, extensions.data());
 
 		std::unordered_set<std::string> available;
-		for(auto const& extension : extensions) available.insert(extension.extensionName);
+		for (auto const& extension : extensions) available.insert(extension.extensionName);
 
 		auto requiredExtensions = getRequiredExtensions();
-		for(auto const& required : requiredExtensions)
-			if(available.find(required) == available.end()) return false;
+		for (auto const& required : requiredExtensions)
+			if (available.find(required) == available.end()) return false;
 
 		return true;
 	}
@@ -277,7 +277,7 @@ namespace VulkanBase
 
 		std::set<std::string> requiredExtensions(deviceExtensions.begin(), deviceExtensions.end());
 
-		for(auto const& extension : availableExtensions) { requiredExtensions.erase(extension.extensionName); }
+		for (auto const& extension : availableExtensions) { requiredExtensions.erase(extension.extensionName); }
 
 		return requiredExtensions.empty();
 	}
@@ -293,21 +293,21 @@ namespace VulkanBase
 		vkGetPhysicalDeviceQueueFamilyProperties(device, &queueFamilyCount, queueFamilies.data());
 
 		int i = 0;
-		for(auto const& queueFamily : queueFamilies)
+		for (auto const& queueFamily : queueFamilies)
 		{
-			if(queueFamily.queueCount > 0 && queueFamily.queueFlags & VK_QUEUE_GRAPHICS_BIT)
+			if (queueFamily.queueCount > 0 && queueFamily.queueFlags & VK_QUEUE_GRAPHICS_BIT)
 			{
 				indices.graphicsFamily		   = i;
 				indices.graphicsFamilyHasValue = true;
 			}
 			VkBool32 presentSupport = false;
 			vkGetPhysicalDeviceSurfaceSupportKHR(device, i, surface_, &presentSupport);
-			if(queueFamily.queueCount > 0 && presentSupport)
+			if (queueFamily.queueCount > 0 && presentSupport)
 			{
 				indices.presentFamily		  = i;
 				indices.presentFamilyHasValue = true;
 			}
-			if(indices.isComplete()) { break; }
+			if (indices.isComplete()) { break; }
 
 			i++;
 		}
@@ -323,7 +323,7 @@ namespace VulkanBase
 		uint32_t formatCount;
 		vkGetPhysicalDeviceSurfaceFormatsKHR(device, surface_, &formatCount, nullptr);
 
-		if(formatCount != 0)
+		if (formatCount != 0)
 		{
 			details.formats.resize(formatCount);
 			vkGetPhysicalDeviceSurfaceFormatsKHR(device, surface_, &formatCount, details.formats.data());
@@ -332,7 +332,7 @@ namespace VulkanBase
 		uint32_t presentModeCount;
 		vkGetPhysicalDeviceSurfacePresentModesKHR(device, surface_, &presentModeCount, nullptr);
 
-		if(presentModeCount != 0)
+		if (presentModeCount != 0)
 		{
 			details.presentModes.resize(presentModeCount);
 			vkGetPhysicalDeviceSurfacePresentModesKHR(device, surface_, &presentModeCount, details.presentModes.data());
@@ -343,16 +343,16 @@ namespace VulkanBase
 	VkFormat Device::findSupportedFormat(std::vector<VkFormat> const& candidates, VkImageTiling tiling,
 										 VkFormatFeatureFlags features)
 	{
-		for(VkFormat format : candidates)
+		for (VkFormat format : candidates)
 		{
 			VkFormatProperties props;
 			vkGetPhysicalDeviceFormatProperties(physicalDevice, format, &props);
 
-			if(tiling == VK_IMAGE_TILING_LINEAR && (props.linearTilingFeatures & features) == features)
+			if (tiling == VK_IMAGE_TILING_LINEAR && (props.linearTilingFeatures & features) == features)
 			{
 				return format;
 			}
-			else if(tiling == VK_IMAGE_TILING_OPTIMAL && (props.optimalTilingFeatures & features) == features)
+			else if (tiling == VK_IMAGE_TILING_OPTIMAL && (props.optimalTilingFeatures & features) == features)
 			{
 				return format;
 			}
@@ -364,9 +364,9 @@ namespace VulkanBase
 	{
 		VkPhysicalDeviceMemoryProperties memProperties;
 		vkGetPhysicalDeviceMemoryProperties(physicalDevice, &memProperties);
-		for(uint32_t i = 0; i < memProperties.memoryTypeCount; i++)
+		for (uint32_t i = 0; i < memProperties.memoryTypeCount; i++)
 		{
-			if((typeFilter & (1 << i)) && (memProperties.memoryTypes[i].propertyFlags & properties) == properties)
+			if ((typeFilter & (1 << i)) && (memProperties.memoryTypes[i].propertyFlags & properties) == properties)
 			{
 				return i;
 			}
@@ -384,7 +384,7 @@ namespace VulkanBase
 		bufferInfo.usage	   = usage;
 		bufferInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
 
-		if(vkCreateBuffer(device_, &bufferInfo, nullptr, &buffer) != VK_SUCCESS)
+		if (vkCreateBuffer(device_, &bufferInfo, nullptr, &buffer) != VK_SUCCESS)
 		{
 			throw std::runtime_error("failed to create vertex buffer!");
 		}
@@ -397,7 +397,7 @@ namespace VulkanBase
 		allocInfo.allocationSize  = memRequirements.size;
 		allocInfo.memoryTypeIndex = findMemoryType(memRequirements.memoryTypeBits, properties);
 
-		if(vkAllocateMemory(device_, &allocInfo, nullptr, &bufferMemory) != VK_SUCCESS)
+		if (vkAllocateMemory(device_, &allocInfo, nullptr, &bufferMemory) != VK_SUCCESS)
 		{
 			throw std::runtime_error("failed to allocate vertex buffer memory!");
 		}
@@ -476,7 +476,7 @@ namespace VulkanBase
 	void Device::createImageWithInfo(VkImageCreateInfo const& imageInfo, VkMemoryPropertyFlags properties,
 									 VkImage& image, VkDeviceMemory& imageMemory)
 	{
-		if(vkCreateImage(device_, &imageInfo, nullptr, &image) != VK_SUCCESS)
+		if (vkCreateImage(device_, &imageInfo, nullptr, &image) != VK_SUCCESS)
 		{
 			throw std::runtime_error("failed to create image!");
 		}
@@ -489,12 +489,12 @@ namespace VulkanBase
 		allocInfo.allocationSize  = memRequirements.size;
 		allocInfo.memoryTypeIndex = findMemoryType(memRequirements.memoryTypeBits, properties);
 
-		if(vkAllocateMemory(device_, &allocInfo, nullptr, &imageMemory) != VK_SUCCESS)
+		if (vkAllocateMemory(device_, &allocInfo, nullptr, &imageMemory) != VK_SUCCESS)
 		{
 			throw std::runtime_error("failed to allocate image memory!");
 		}
 
-		if(vkBindImageMemory(device_, image, imageMemory, 0) != VK_SUCCESS)
+		if (vkBindImageMemory(device_, image, imageMemory, 0) != VK_SUCCESS)
 		{
 			throw std::runtime_error("failed to bind image memory!");
 		}
