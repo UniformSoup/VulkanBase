@@ -29,8 +29,8 @@ namespace VulkanBase
 
 	void Model::bind(VkCommandBuffer commandBuffer) const
 	{
-		VkBuffer	 buffers[] = {vertexBuffer};
-		VkDeviceSize offsets[] = {0};
+		VkBuffer	 buffers[] = { vertexBuffer };
+		VkDeviceSize offsets[] = { 0 };
 		vkCmdBindVertexBuffers(commandBuffer, 0, 1, buffers, offsets);
 	}
 

@@ -43,14 +43,13 @@ void createDebugMessenger(VkInstance& instance, VkDebugUtilsMessengerEXT& debugM
 
 namespace VulkanBase
 {
-	void DestroyDebugUtilsMessengerEXT(VkInstance instance, VkDebugUtilsMessengerEXT debugMessenger,
-									   VkAllocationCallbacks const* pAllocator)
+	void DestroyDebugUtilsMessengerEXT(VkInstance instance, VkDebugUtilsMessengerEXT debugMessenger, VkAllocationCallbacks const* pAllocator)
 	{
 	}
 
 	// class member functions
 	Device::Device(Window& window)
-		: window {window}
+		: window { window }
 	{
 		createInstance();
 #ifdef DEBUG
@@ -150,7 +149,7 @@ namespace VulkanBase
 		QueueFamilyIndices indices = findQueueFamilies(physicalDevice);
 
 		std::vector<VkDeviceQueueCreateInfo> queueCreateInfos;
-		std::set<uint32_t>					 uniqueQueueFamilies = {indices.graphicsFamily, indices.presentFamily};
+		std::set<uint32_t>					 uniqueQueueFamilies = { indices.graphicsFamily, indices.presentFamily };
 
 		float queuePriority = 1.0f;
 		for (uint32_t queueFamily : uniqueQueueFamilies)
@@ -341,8 +340,7 @@ namespace VulkanBase
 		return details;
 	}
 
-	VkFormat Device::findSupportedFormat(std::vector<VkFormat> const& candidates, VkImageTiling tiling,
-										 VkFormatFeatureFlags features)
+	VkFormat Device::findSupportedFormat(std::vector<VkFormat> const& candidates, VkImageTiling tiling, VkFormatFeatureFlags features)
 	{
 		for (VkFormat format : candidates)
 		{
@@ -376,8 +374,7 @@ namespace VulkanBase
 		throw std::runtime_error("failed to find suitable memory type!");
 	}
 
-	void Device::createBuffer(VkDeviceSize size, VkBufferUsageFlags usage, VkMemoryPropertyFlags properties,
-							  VkBuffer& buffer, VkDeviceMemory& bufferMemory)
+	void Device::createBuffer(VkDeviceSize size, VkBufferUsageFlags usage, VkMemoryPropertyFlags properties, VkBuffer& buffer, VkDeviceMemory& bufferMemory)
 	{
 		VkBufferCreateInfo bufferInfo {};
 		bufferInfo.sType	   = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO;
@@ -467,15 +464,14 @@ namespace VulkanBase
 		region.imageSubresource.baseArrayLayer = 0;
 		region.imageSubresource.layerCount	   = layerCount;
 
-		region.imageOffset = {0, 0, 0};
-		region.imageExtent = {width, height, 1};
+		region.imageOffset = { 0, 0, 0 };
+		region.imageExtent = { width, height, 1 };
 
 		vkCmdCopyBufferToImage(commandBuffer, buffer, image, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, 1, &region);
 		endSingleTimeCommands(commandBuffer);
 	}
 
-	void Device::createImageWithInfo(VkImageCreateInfo const& imageInfo, VkMemoryPropertyFlags properties,
-									 VkImage& image, VkDeviceMemory& imageMemory)
+	void Device::createImageWithInfo(VkImageCreateInfo const& imageInfo, VkMemoryPropertyFlags properties, VkImage& image, VkDeviceMemory& imageMemory)
 	{
 		if (vkCreateImage(device_, &imageInfo, nullptr, &image) != VK_SUCCESS)
 		{
@@ -491,14 +487,10 @@ namespace VulkanBase
 		allocInfo.memoryTypeIndex = findMemoryType(memRequirements.memoryTypeBits, properties);
 
 		if (vkAllocateMemory(device_, &allocInfo, nullptr, &imageMemory) != VK_SUCCESS)
-		{
 			throw std::runtime_error("failed to allocate image memory!");
-		}
 
 		if (vkBindImageMemory(device_, image, imageMemory, 0) != VK_SUCCESS)
-		{
 			throw std::runtime_error("failed to bind image memory!");
-		}
 	}
 
 }

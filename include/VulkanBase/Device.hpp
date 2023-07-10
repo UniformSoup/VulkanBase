@@ -54,17 +54,14 @@ namespace VulkanBase
 
 			QueueFamilyIndices findPhysicalQueueFamilies() { return findQueueFamilies(physicalDevice); }
 
-			VkFormat		findSupportedFormat(std::vector<VkFormat> const& candidates, VkImageTiling tiling,
-												VkFormatFeatureFlags features);
-			void			createBuffer(VkDeviceSize size, VkBufferUsageFlags usage, VkMemoryPropertyFlags properties,
-										 VkBuffer& buffer, VkDeviceMemory& bufferMemory);
+			VkFormat		findSupportedFormat(std::vector<VkFormat> const& candidates, VkImageTiling tiling, VkFormatFeatureFlags features);
+			void			createBuffer(VkDeviceSize size, VkBufferUsageFlags usage, VkMemoryPropertyFlags properties, VkBuffer& buffer, VkDeviceMemory& bufferMemory);
 			VkCommandBuffer beginSingleTimeCommands();
 			void			endSingleTimeCommands(VkCommandBuffer commandBuffer);
 			void			copyBuffer(VkBuffer srcBuffer, VkBuffer dstBuffer, VkDeviceSize size);
 			void			copyBufferToImage(VkBuffer buffer, VkImage image, uint32_t width, uint32_t height, uint32_t layerCount);
 
-			void createImageWithInfo(VkImageCreateInfo const& imageInfo, VkMemoryPropertyFlags properties, VkImage& image,
-									 VkDeviceMemory& imageMemory);
+			void createImageWithInfo(VkImageCreateInfo const& imageInfo, VkMemoryPropertyFlags properties, VkImage& image, VkDeviceMemory& imageMemory);
 
 			VkPhysicalDeviceProperties properties;
 
@@ -96,10 +93,10 @@ namespace VulkanBase
 			VkQueue		 graphicsQueue_;
 			VkQueue		 presentQueue_;
 
-			const std::vector<char const*> validationLayers = {"VK_LAYER_KHRONOS_validation"};
-			const std::vector<char const*> deviceExtensions = {VK_KHR_SWAPCHAIN_EXTENSION_NAME,
+			const std::vector<char const*> validationLayers = { "VK_LAYER_KHRONOS_validation" };
+			const std::vector<char const*> deviceExtensions = { VK_KHR_SWAPCHAIN_EXTENSION_NAME,
 #ifdef __APPLE__
-															   "VK_KHR_portability_subset"
+																"VK_KHR_portability_subset"
 #endif
 			};
 	};
