@@ -4,6 +4,7 @@ add_library(
     Pipeline.cpp
     SwapChain.cpp
     Model.cpp
+    Renderer.cpp
 )
 
 target_link_libraries(VulkanBase PUBLIC ${Vulkan_LIBRARIES} glm::glm)
