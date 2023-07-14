@@ -30,9 +30,10 @@ namespace VulkanBase
 			VkCommandBuffer beginCommandBuffer();
 			void			endCommandBuffer();
 
-			void		 beginRenderPass(VkCommandBuffer commandBuffer);
-			void		 endRenderPass(VkCommandBuffer commandBuffer);
-			void		 recreateSwapChain();
-			VkRenderPass getRenderPass();
+			void		 			   beginRenderPass(VkCommandBuffer commandBuffer);
+			void		 			   endRenderPass(VkCommandBuffer commandBuffer);
+			std::unique_ptr<SwapChain> recreateSwapChain();
+			bool 					   isCompatible(SwapChain const& oldSwapChain);
+			VkRenderPass 			   getRenderPass();
 	};
 }

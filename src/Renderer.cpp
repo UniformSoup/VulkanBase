@@ -20,7 +20,7 @@ namespace VulkanBase
 
 	Renderer::~Renderer() { vkFreeCommandBuffers(device.device(), device.getCommandPool(), static_cast<uint32_t>(commandBuffers.size()), commandBuffers.data()); }
 
-	void Renderer::recreateSwapChain()
+	std::unique_ptr<SwapChain> Renderer::recreateSwapChain()
 	{
         std::unique_ptr<SwapChain> oldSwapChain = std::move(swapChain);
 		swapChain = std::make_unique<VulkanBase::SwapChain>(device, window.getExtent(), oldSwapChain.get());
@@ -41,8 +41,7 @@ namespace VulkanBase
 				throw std::runtime_error("Failed to allocate command buffers!");
 		}
 
-        if (!swapChain->compareFormats(*(oldSwapChain.get())))
-            throw std::runtime_error("The swapchain image format has changed!");
+        return oldSwapChain;
 	}
 
 	VkCommandBuffer Renderer::beginCommandBuffer()
@@ -118,4 +117,9 @@ namespace VulkanBase
 	{
 		return swapChain->getRenderPass();
 	}
+
+    bool Renderer::isCompatible(SwapChain const& oldSwapChain)
+    {
+        return swapChain->compareFormats(oldSwapChain);
+    }
 }
