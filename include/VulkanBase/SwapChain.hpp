@@ -16,7 +16,7 @@ namespace VulkanBase
 
 			static constexpr int MAX_FRAMES_IN_FLIGHT = 2;
 
-			SwapChain(Device& deviceRef, VkExtent2D windowExtent, std::unique_ptr<SwapChain> const&& old = nullptr);
+			SwapChain(Device& deviceRef, VkExtent2D windowExtent, SwapChain const * const old = nullptr);
 			~SwapChain();
 
 			SwapChain(SwapChain const&)			   = delete;
@@ -48,6 +48,12 @@ namespace VulkanBase
 			VkResult acquireNextImage(uint32_t* imageIndex);
 			VkResult submitCommandBuffers(VkCommandBuffer const* buffers, uint32_t* imageIndex);
 
+			bool compareFormats(const SwapChain& swapChain) const
+			{
+				return swapChain.swapChainDepthFormat == swapChainDepthFormat &&
+					   swapChain.swapChainImageFormat == swapChainImageFormat;
+			} 
+
 		private:
 
 			void createSwapChain(VkSwapchainKHR const& old);
@@ -63,6 +69,7 @@ namespace VulkanBase
 			VkExtent2D		   chooseSwapExtent(VkSurfaceCapabilitiesKHR const& capabilities);
 
 			VkFormat   swapChainImageFormat;
+			VkFormat   swapChainDepthFormat;
 			VkExtent2D swapChainExtent;
 
 			std::vector<VkFramebuffer> swapChainFramebuffers;
