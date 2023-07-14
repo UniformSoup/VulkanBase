@@ -13,12 +13,13 @@ namespace VulkanBase
 {
 	class Renderer
 	{
-			Window&								   window;
-			Device&								   device;
-			std::unique_ptr<VulkanBase::SwapChain> swapChain;
-			std::vector<VkCommandBuffer>		   commandBuffers;
+			Window&						 window;
+			Device&						 device;
+			std::unique_ptr<SwapChain>	 swapChain;
+			std::vector<VkCommandBuffer> commandBuffers;
 
-			uint32_t currentImage;
+			uint32_t imageIndex;
+			int		 frameIndex;
 
 		public:
 
@@ -30,10 +31,12 @@ namespace VulkanBase
 			VkCommandBuffer beginCommandBuffer();
 			void			endCommandBuffer();
 
-			void		 			   beginRenderPass(VkCommandBuffer commandBuffer);
-			void		 			   endRenderPass(VkCommandBuffer commandBuffer);
+			void					   beginRenderPass(VkCommandBuffer commandBuffer);
+			void					   endRenderPass(VkCommandBuffer commandBuffer);
 			std::unique_ptr<SwapChain> recreateSwapChain();
-			bool 					   isCompatible(SwapChain const& oldSwapChain);
-			VkRenderPass 			   getRenderPass();
+			bool					   isCompatible(SwapChain const& oldSwapChain);
+			VkRenderPass			   getRenderPass();
+
+			int getFrameIndex() const { return frameIndex; }
 	};
 }

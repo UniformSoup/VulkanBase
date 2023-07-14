@@ -11,7 +11,7 @@
 namespace VulkanBase
 {
 
-	SwapChain::SwapChain(Device& deviceRef, VkExtent2D extent, SwapChain const * const old)
+	SwapChain::SwapChain(Device& deviceRef, VkExtent2D extent, SwapChain const* const old)
 		: device { deviceRef },
 		  windowExtent { extent }
 	{
@@ -293,7 +293,7 @@ namespace VulkanBase
 
 	void SwapChain::createDepthResources()
 	{
-		swapChainDepthFormat = findDepthFormat();
+		swapChainDepthFormat	   = findDepthFormat();
 		VkExtent2D swapChainExtent = getSwapChainExtent();
 
 		depthImages.resize(imageCount());
