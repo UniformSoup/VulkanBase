@@ -40,40 +40,40 @@ namespace VulkanBase
 				throw std::runtime_error("Failed to allocate command buffers!");
 		}
 	}
-    
-    VkCommandBuffer Renderer::beginCommandBuffer()
-    {
-	    auto res = swapChain->acquireNextImage(&currentImage);
 
-	    if (res == VK_ERROR_OUT_OF_DATE_KHR) return nullptr;
+	VkCommandBuffer Renderer::beginCommandBuffer()
+	{
+		auto res = swapChain->acquireNextImage(&currentImage);
 
-	    else if (res != VK_SUCCESS && res != VK_SUBOPTIMAL_KHR)
-		    throw std::runtime_error("Failed to acquire swapchain image!");
+		if (res == VK_ERROR_OUT_OF_DATE_KHR) return nullptr;
 
-        VkCommandBufferBeginInfo info = { VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO };
+		else if (res != VK_SUCCESS && res != VK_SUBOPTIMAL_KHR)
+			throw std::runtime_error("Failed to acquire swapchain image!");
+
+		VkCommandBufferBeginInfo info = { VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO };
 
 		if (vkBeginCommandBuffer(commandBuffers[currentImage], &info))
 			throw std::runtime_error("Failed to begin recording command buffer!");
 
-        return commandBuffers[currentImage];
-    }
-	
-    void Renderer::endCommandBuffer()
-    {
-        if (vkEndCommandBuffer(commandBuffers[currentImage]) != VK_SUCCESS)
+		return commandBuffers[currentImage];
+	}
+
+	void Renderer::endCommandBuffer()
+	{
+		if (vkEndCommandBuffer(commandBuffers[currentImage]) != VK_SUCCESS)
 			throw std::runtime_error("Failed to record command buffer!");
 
-        auto res = swapChain->submitCommandBuffers(&commandBuffers[currentImage], &currentImage);
+		auto res = swapChain->submitCommandBuffers(&commandBuffers[currentImage], &currentImage);
 
-        if (res == VK_ERROR_OUT_OF_DATE_KHR || res == VK_SUBOPTIMAL_KHR) recreateSwapChain();
+		if (res == VK_ERROR_OUT_OF_DATE_KHR || res == VK_SUBOPTIMAL_KHR)
+			recreateSwapChain();
 
-        if (res != VK_SUCCESS) throw std::runtime_error("Failed to present swapchain image!");
-
-    }
+		if (res != VK_SUCCESS) throw std::runtime_error("Failed to present swapchain image!");
+	}
 
 	void Renderer::beginRenderPass(VkCommandBuffer commandBuffer)
-    {
-        VkRenderPassBeginInfo renderPassInfo = { VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO };
+	{
+		VkRenderPassBeginInfo renderPassInfo = { VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO };
 		renderPassInfo.renderPass			 = swapChain->getRenderPass();
 		renderPassInfo.framebuffer			 = swapChain->getFrameBuffer(currentImage);
 		renderPassInfo.renderArea.offset	 = { 0, 0 };
@@ -103,16 +103,15 @@ namespace VulkanBase
 
 		vkCmdSetViewport(commandBuffers[currentImage], 0, 1, &vp);
 		vkCmdSetScissor(commandBuffers[currentImage], 0, 1, &scissor);
-    }
-	
-    void Renderer::endRenderPass(VkCommandBuffer commandBuffer)
-    {
-        vkCmdEndRenderPass(commandBuffers[currentImage]);
+	}
 
-    }
+	void Renderer::endRenderPass(VkCommandBuffer commandBuffer)
+	{
+		vkCmdEndRenderPass(commandBuffers[currentImage]);
+	}
 
-    VkRenderPass Renderer::getRenderPass()
-    {
-        return swapChain->getRenderPass();
-    }
+	VkRenderPass Renderer::getRenderPass()
+	{
+		return swapChain->getRenderPass();
+	}
 }

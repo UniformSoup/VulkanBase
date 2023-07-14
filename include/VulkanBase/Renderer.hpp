@@ -14,25 +14,25 @@ namespace VulkanBase
 	class Renderer
 	{
 			Window&								   window;
-			Device&		  						   device;
+			Device&								   device;
 			std::unique_ptr<VulkanBase::SwapChain> swapChain;
 			std::vector<VkCommandBuffer>		   commandBuffers;
-		
+
 			uint32_t currentImage;
 
 		public:
 
 			Renderer(Window& window, Device& device);
 			~Renderer();
-			Renderer(Renderer const&)			   = delete;
+			Renderer(Renderer const&)			 = delete;
 			Renderer& operator=(Renderer const&) = delete;
 
 			VkCommandBuffer beginCommandBuffer();
-			void endCommandBuffer();
+			void			endCommandBuffer();
 
-			void beginRenderPass(VkCommandBuffer commandBuffer);
-			void endRenderPass(VkCommandBuffer commandBuffer);
-			void recreateSwapChain();
+			void		 beginRenderPass(VkCommandBuffer commandBuffer);
+			void		 endRenderPass(VkCommandBuffer commandBuffer);
+			void		 recreateSwapChain();
 			VkRenderPass getRenderPass();
 	};
 }
