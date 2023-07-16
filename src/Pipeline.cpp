@@ -117,7 +117,7 @@ namespace VulkanBase
 		config.rasterizationInfo.rasterizerDiscardEnable = VK_FALSE;
 		config.rasterizationInfo.polygonMode			 = VK_POLYGON_MODE_FILL;
 		config.rasterizationInfo.lineWidth				 = 1.0f;
-		config.rasterizationInfo.cullMode				 = VK_CULL_MODE_BACK_BIT;	 // SET TO VK_CULL_MODE_BACK when ready
+		config.rasterizationInfo.cullMode				 = VK_CULL_MODE_NONE;	 // SET TO VK_CULL_MODE_BACK when ready
 		config.rasterizationInfo.frontFace				 = VK_FRONT_FACE_CLOCKWISE;
 		config.rasterizationInfo.depthBiasEnable		 = VK_FALSE;
 		config.rasterizationInfo.depthBiasConstantFactor = 0.0f;	// Optional

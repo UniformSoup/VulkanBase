@@ -49,7 +49,7 @@ namespace VulkanBase
 
 		attribDescriptions[0].binding  = 0;
 		attribDescriptions[0].location = 0;
-		attribDescriptions[0].format   = VK_FORMAT_R32G32_SFLOAT;
+		attribDescriptions[0].format   = VK_FORMAT_R32G32B32_SFLOAT;
 		attribDescriptions[0].offset   = offsetof(Vertex, pos);
 
 		attribDescriptions[1].binding  = 0;
