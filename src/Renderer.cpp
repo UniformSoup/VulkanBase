@@ -3,7 +3,7 @@
 namespace VulkanBase
 {
 	Renderer::Renderer(Window& window, Device& device)
-		: window(window), device(device)
+		: window(window), device(device), frameIndex(0)
 
 	{
 		swapChain = std::make_unique<SwapChain>(device, window.getExtent());

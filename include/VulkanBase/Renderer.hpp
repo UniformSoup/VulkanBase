@@ -4,8 +4,6 @@
 #include <memory>
 #include <vector>
 
-#define GLM_FORCE_RADIANS
-#define GLM_FORCE_DEPTH_ZERO_TO_ONE
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
@@ -36,6 +34,7 @@ namespace VulkanBase
 			std::unique_ptr<SwapChain> recreateSwapChain();
 			bool					   isCompatible(SwapChain const& oldSwapChain);
 			VkRenderPass			   getRenderPass();
+			float 					   getAspectRatio() const { return swapChain->extentAspectRatio(); }
 
 			int getFrameIndex() const { return frameIndex; }
 	};
