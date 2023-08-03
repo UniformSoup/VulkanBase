@@ -1,11 +1,10 @@
 #include "Device.hpp"
 #include "SwapChain.hpp"
 
-#include <memory>
-#include <vector>
-
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <memory>
+#include <vector>
 
 namespace VulkanBase
 {
@@ -34,7 +33,7 @@ namespace VulkanBase
 			std::unique_ptr<SwapChain> recreateSwapChain();
 			bool					   isCompatible(SwapChain const& oldSwapChain);
 			VkRenderPass			   getRenderPass();
-			float 					   getAspectRatio() const { return swapChain->extentAspectRatio(); }
+			float					   getAspectRatio() const { return swapChain->extentAspectRatio(); }
 
 			int getFrameIndex() const { return frameIndex; }
 	};
