@@ -1,7 +1,5 @@
 #include "Pipeline.hpp"
 
-#include "Model.hpp"
-
 #include <cstdint>
 #include <fstream>
 #include <iostream>
@@ -28,7 +26,7 @@ void createShaderModule(VkDevice device, std::vector<uint8_t> const& code, VkSha
 
 namespace VulkanBase
 {
-	Pipeline::Pipeline(Device& device, std::string const& vertexPath, std::string const& fragmentPath, PipelineConfig const& config)
+	Pipeline::Pipeline(Device& device, std::string const& vertexPath, std::string const& fragmentPath, std::vector<VkVertexInputBindingDescription> const& bindingDescs, std::vector<VkVertexInputAttributeDescription> const& attribDescs, PipelineConfig const& config)
 		: device(device)
 	{
 		std::vector<uint8_t> vertex	  = read(vertexPath);
@@ -52,9 +50,6 @@ namespace VulkanBase
 		shaderStages[1].pName  = "main";
 		shaderStages[1].flags  = 0;
 		shaderStages[1].pNext  = nullptr;
-
-		auto bindingDescs = Vertex::getBindingDescriptions();
-		auto attribDescs  = Vertex::getAttributeDescriptions();
 
 		VkPipelineVertexInputStateCreateInfo vertexInputInfo = {};
 		vertexInputInfo.sType								 = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;

@@ -3,7 +3,6 @@ add_library(
     Device.cpp
     Pipeline.cpp
     SwapChain.cpp
-    Model.cpp
     Renderer.cpp
 )
 

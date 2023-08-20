@@ -35,7 +35,7 @@ namespace VulkanBase
 
 		public:
 
-			Pipeline(Device& device, std::string const& vertexPath, std::string const& fragmentPath, PipelineConfig const& config);
+			Pipeline(Device& device, std::string const& vertexPath, std::string const& fragmentPath, std::vector<VkVertexInputBindingDescription> const& bindingDescs, std::vector<VkVertexInputAttributeDescription> const& attribDescs, PipelineConfig const& config);
 			~Pipeline();
 
 			void bind(VkCommandBuffer const& cmdBuf) const;
