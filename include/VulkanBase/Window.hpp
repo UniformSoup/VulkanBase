@@ -14,8 +14,8 @@ namespace VulkanBase
 			Window& operator=(Window const&) = delete;
 
 			virtual void					 createWindowSurface(VkInstance& instance, VkSurfaceKHR* const pSurface) = 0;
-			virtual std::vector<char const*> requiredInstanceExtensions() const										 = 0;
+			virtual std::vector<char const*> getRequiredInstanceExtensions() const									 = 0;
 			virtual VkExtent2D				 getExtent() const														 = 0;
-			virtual char const*				 name() const															 = 0;
+			virtual char const*				 getName() const														 = 0;
 	};
 }

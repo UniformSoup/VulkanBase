@@ -85,7 +85,7 @@ namespace VulkanBase
 
 		VkApplicationInfo appInfo  = {};
 		appInfo.sType			   = VK_STRUCTURE_TYPE_APPLICATION_INFO;
-		appInfo.pApplicationName   = window.name();
+		appInfo.pApplicationName   = window.getName();
 		appInfo.applicationVersion = VK_MAKE_VERSION(1, 0, 0);
 		appInfo.pEngineName		   = "VulkanBase";
 		appInfo.engineVersion	   = VK_MAKE_VERSION(1, 0, 0);
@@ -242,7 +242,7 @@ namespace VulkanBase
 
 	std::vector<char const*> Device::getRequiredExtensions()
 	{
-		auto extensions = window.requiredInstanceExtensions();
+		auto extensions = window.getRequiredInstanceExtensions();
 
 #ifdef DEBUG
 		extensions.push_back(VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
