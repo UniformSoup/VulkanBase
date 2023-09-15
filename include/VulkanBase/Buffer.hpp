@@ -4,6 +4,9 @@
 
 #include "Device.hpp"
 
+// replace this all using vma.
+// it doesnt scale well.
+
 namespace VulkanBase
 {
 	class Buffer

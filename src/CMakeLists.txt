@@ -5,6 +5,7 @@ add_library(
     SwapChain.cpp
     Renderer.cpp
     Buffer.cpp
+    Descriptors.cpp
 )
 
 target_link_libraries(VulkanBase PUBLIC ${Vulkan_LIBRARIES} glm::glm)
