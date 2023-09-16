@@ -32,7 +32,7 @@ namespace VulkanBase
 		VkMemoryPropertyFlags memoryPropertyFlags,
 		VkDeviceSize		  minOffsetAlignment)
 		: device { device },
-          instanceCount { instanceCount },
+		  instanceCount { instanceCount },
 		  instanceSize { instanceSize },
 		  usageFlags { usageFlags },
 		  memoryPropertyFlags { memoryPropertyFlags }

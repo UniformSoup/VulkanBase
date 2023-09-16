@@ -1,8 +1,8 @@
 #include "Descriptors.hpp"
 
 #include <cassert>
-#include <stdexcept>
 #include <memory>
+#include <stdexcept>
 
 namespace VulkanBase
 {
@@ -91,7 +91,7 @@ namespace VulkanBase
 	// *************** Descriptor Pool *********************
 
 	DescriptorPool::DescriptorPool(
-		Device&								 device,
+		Device&									 device,
 		uint32_t								 maxSets,
 		VkDescriptorPoolCreateFlags				 poolFlags,
 		std::vector<VkDescriptorPoolSize> const& poolSizes)
@@ -217,4 +217,4 @@ namespace VulkanBase
 		vkUpdateDescriptorSets(pool.device.device(), writes.size(), writes.data(), 0, nullptr);
 	}
 
-}	 // namespace 
+}	 // namespace

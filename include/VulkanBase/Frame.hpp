@@ -4,12 +4,12 @@
 
 namespace VulkanBase
 {
-    struct Frame
-    {
-        int index;
-        float dt;
-        VkCommandBuffer cmdBuf;
-        Camera& camera;
-        VkDescriptorSet descriptorSet;
-    };
+	struct Frame
+	{
+			int				index;
+			float			dt;
+			VkCommandBuffer cmdBuf;
+			Camera&			camera;
+			VkDescriptorSet descriptorSet;
+	};
 }

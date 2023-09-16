@@ -11,7 +11,7 @@ namespace VulkanBase
 {
 	class Buffer
 	{
-        	static VkDeviceSize getAlignment(VkDeviceSize instanceSize, VkDeviceSize minOffsetAlignment);
+			static VkDeviceSize getAlignment(VkDeviceSize instanceSize, VkDeviceSize minOffsetAlignment);
 
 			Device&		   device;
 			void*		   mapped = nullptr;
@@ -28,7 +28,7 @@ namespace VulkanBase
 		public:
 
 			Buffer(
-				Device&			  device,
+				Device&				  device,
 				VkDeviceSize		  instanceSize,
 				uint32_t			  instanceCount,
 				VkBufferUsageFlags	  usageFlags,
